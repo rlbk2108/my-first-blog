@@ -27,7 +27,9 @@ class PostCreateView(CreateView):
 
 class PostUpdateView(UpdateView):
     model = Post
-    fields = ['title, text']
+    form_class = PostForm
+    success_url = reverse_lazy('post_list')
+    template_name = 'blog/post_edit.html'
 
 
 class PostDeleteView(DeleteView):
