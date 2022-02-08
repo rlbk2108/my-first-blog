@@ -1,0 +1,30 @@
+
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Новое что-то! {% endblock %}
+{% block content %}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+          <hr class="mb-4">
+          <h2>Новое что-то</h2>
+          <form class="" method="post">
+          {% csrf_token %}
+          {{ form.author|as_crispy_field }}
+          {{ form.title|as_crispy_field }}
+          {{ form.text|as_crispy_field }}
+          {{ form.created_date|as_crispy_field }}
+          {{ form.published_date|as_crispy_field }}
+          <input class="button btn btn-primary" type="submit" value="Создать">
+          </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
