@@ -1,38 +1,46 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
-
+from django.http import Http404
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from .models import Post
-from django.utils import timezone
-from .forms import PostForm, CreateForm
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.views import LoginView
+from .serializers import PostSerializer
+from rest_framework import generics
 
 
-class PostListView(ListView):
-    model = Post
-    context_object_name = 'posts'
+class PostList(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
 
-class PostDetailView(DetailView):
-    model = Post
-    context_object_name = 'post'
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+# class PostListView(ListView):
+#     model = Post
+#     context_object_name = 'posts'
 
 
-class PostCreateView(CreateView):
-    model = Post
-    form_class = CreateForm
-    success_url = reverse_lazy('post_list')
-    template_name = 'blog/post_new.html'
+# class PostDetailView(DetailView):
+#     model = Post
+#     context_object_name = 'post'
 
 
-class PostUpdateView(UpdateView):
-    model = Post
-    form_class = PostForm
-    success_url = reverse_lazy('post_list')
-    template_name = 'blog/post_edit.html'
+# class PostCreateView(CreateView):
+#     model = Post
+#     form_class = CreateForm
+#     success_url = reverse_lazy('post_list')
+#     template_name = 'blog/post_new.html'
 
 
-class PostDeleteView(DeleteView):
-    model = Post
-    success_url = reverse_lazy('post_list')
-    template_name = 'blog/post_delete.html'
+# class PostUpdateView(UpdateView):
+#     model = Post
+#     form_class = PostForm
+#     success_url = reverse_lazy('post_list')
+#     template_name = 'blog/post_edit.html'
+#
+#
+# class PostDeleteView(DeleteView):
+#     model = Post
+#     success_url = reverse_lazy('post_list')
+#     template_name = 'blog/post_delete.html'
