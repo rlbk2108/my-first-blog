@@ -1,10 +1,6 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from pygments.filters import NameHighlightFilter
-from pygments.lexers import get_lexer_by_name
-from pygments.formatters.html import HtmlFormatter
-from pygments import highlight
 
 
 class Post(models.Model):

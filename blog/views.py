@@ -27,32 +27,3 @@ class PostViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-# class PostListView(ListView):
-#     model = Post
-#     context_object_name = 'posts'
-
-
-# class PostDetailView(DetailView):
-#     model = Post
-#     context_object_name = 'post'
-
-
-# class PostCreateView(CreateView):
-#     model = Post
-#     form_class = CreateForm
-#     success_url = reverse_lazy('post_list')
-#     template_name = 'blog/post_new.html'
-
-
-# class PostUpdateView(UpdateView):
-#     model = Post
-#     form_class = PostForm
-#     success_url = reverse_lazy('post_list')
-#     template_name = 'blog/post_edit.html'
-#
-#
-# class PostDeleteView(DeleteView):
-#     model = Post
-#     success_url = reverse_lazy('post_list')
-#     template_name = 'blog/post_delete.html'

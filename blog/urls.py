@@ -1,10 +1,9 @@
-from .views import PostViewSet, UserViewSet
 from rest_framework import renderers
 from rest_framework.routers import DefaultRouter
 from . import views
 from django.urls import path, include
-
 from .views import PostViewSet, UserViewSet
+
 
 post_list = PostViewSet.as_view({
     'get': 'list',
