@@ -1,21 +1,44 @@
-from django.urls import path
+from .views import PostViewSet, UserViewSet
+from rest_framework import renderers
+from rest_framework.routers import DefaultRouter
 from . import views
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.urls import path, include
+
+from .views import PostViewSet, UserViewSet
+
+post_list = PostViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+post_detail = PostViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+})
+post_highlight = PostViewSet.as_view({
+    'get': 'highlight'
+}, renderer_classes=[renderers.StaticHTMLRenderer])
+user_list = UserViewSet.as_view({
+    'get': 'list'
+})
+user_detail = UserViewSet.as_view({
+    'get': 'retrieve'
+})
 
 
+
+# Create a router and register our viewsets with it.
+router = DefaultRouter()
+router.register(r'posts', views.PostViewSet)
+router.register(r'users', views.UserViewSet)
+
+# The API URLs are now determined automatically by the router.
 urlpatterns = [
-    path('post/', views.PostList.as_view()),
-    path('post/<int:pk>/', views.PostDetail.as_view()),
-    path('users/', views.UserList.as_view()),
-    path('users/<int:pk>/', views.UserDetail.as_view()),
+    path('', include(router.urls)),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
 
-# urlpatterns = [
-#     path('', views.post_list_or_create, name='post_list'),
-#     path('post/<int:pk>/', views.post_detail, name='post_detail'),
-#     path('post/new/', views.post_list_or_create, name='post_new'),
-#     path('post/<int:pk>/edit/', views.post_detail, name='post_edit'),
-#     path('post/<int:pk>/delete/', views.post_detail, name='post_delete'),
-# ]
+
+
+
